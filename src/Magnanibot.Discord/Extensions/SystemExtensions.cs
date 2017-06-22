@@ -32,7 +32,7 @@ namespace Magnanibot.Extensions
         }
 
         public static bool ShouldBeSeen(this string s)
-            => s != "Unknown command" && s != "A task was canceled.";
+            => s != "Unknown command." && s != "A task was canceled.";
 
         public static (string, string, string, string) ToSubredditDisplay(
             this string sub, IEnumerable<Post> posts, RedditResult.PostCategory postCategory)
