@@ -17,7 +17,7 @@ using Type = CommonBotLibrary.Services.Models.OpenTriviaDbType;
 namespace Magnanibot.Modules
 {
     [Group(nameof(Trivia))]
-    [Summary("Starts an interactive trivia session. **(beta)**")]
+    [Summary("Starts an interactive trivia session.")]
     [RequireBotPermission(ChannelPermission.ManageMessages)]
     [RequireContext(ContextType.Guild)]
     public class Trivia : Module
@@ -32,19 +32,29 @@ namespace Magnanibot.Modules
         private static IDictionary<string, int> DifficultySeconds { get; }
             = new Dictionary<string, int> {{"easy", 10}, {"medium", 20}, {"hard", 30}};
 
-        [Command, Summary("🚧 Uses a random question with any difficulty.")]
+        [Command, Summary("Uses a random question with any difficulty and category.")]
         [Remarks("Example: !trivia")]
         private async Task GetAsync()
-            => await GetWithDifficultyAsync();
+            => await GetWithParamsAsync();
 
-        [Command, Summary("🚧 Uses a random question with a particular difficulty (easy/medium/hard).")]
+        [Command, Summary("Uses a random question with a particular difficulty (easy/medium/hard).")]
         [Remarks("Example: !trivia hard")]
         private async Task GetAsync(Difficulty difficulty)
-            => await GetWithDifficultyAsync(difficulty);
-        
-        private async Task GetWithDifficultyAsync(Difficulty? difficulty = null)
+            => await GetWithParamsAsync(default(Category), difficulty);
+
+        [Command, Summary("Uses a random question with a [particular category](https://pastebin.com/5xnQn0Qr).")]
+        [Remarks("Example: !trivia film")]
+        private async Task GetAsync([Remainder] Category category)
+            => await GetWithParamsAsync(category);
+
+        [Command, Summary("Uses a random question with a particular difficulty and category.")]
+        [Remarks("Example: !trivia easy general knowledge")]
+        private async Task GetAsync(Difficulty difficulty, [Remainder] Category category)
+            => await GetWithParamsAsync(category, difficulty);
+
+        private async Task GetWithParamsAsync(Category category = default(Category), Difficulty? difficulty = null)
         {
-            var trivia = (await Service.GetTriviaAsync(1, Category.Any, difficulty, Type.Multiple)).First();
+            var trivia = (await Service.GetTriviaAsync(1, category, difficulty, Type.Multiple)).First();
             var correctPosition = RandomService.Generator.Next(4);
             var secondsRemaining = DifficultySeconds[trivia.Difficulty];
 

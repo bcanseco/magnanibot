@@ -61,6 +61,7 @@ namespace Magnanibot.Extensions
             service.AddTypeReader<Die>(new DieTypeReader());
             service.AddTypeReader<SymbolBase>(new SymbolTypeReader(yahooFinanceService));
             service.AddTypeReader<SteamResult>(new SteamResultTypeReader(steamService));
+            service.AddTypeReader<OpenTriviaDbCategory>(new CategoryTypeReader());
 
             return collection;
         }
