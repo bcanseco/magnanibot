@@ -17,7 +17,7 @@ namespace Magnanibot.Services
             client.ReactionAdded += OnReactionAsync;
             client.ReactionRemoved += OnReactionRemovedAsync;
             
-            var _ = Task.Run(AuditMessagesAsync);
+            Task.Run(AuditMessagesAsync);
         }
 
         private ulong BotId { get; }
