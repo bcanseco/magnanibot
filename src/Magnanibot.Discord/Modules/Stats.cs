@@ -24,7 +24,7 @@ namespace Magnanibot.Modules
                 await EmbedAsync(new EmbedBuilder()
                     .WithAuthor(BotTokens.Alias, Context.Client.CurrentUser.GetAvatarUrl())
                     .WithColor(new Color(0xFFFFFF))
-                    .WithDescription($"Use `!profile `{Context.Client.CurrentUser.Mention} for more info.")
+                    .WithDescription($"Use `!profile {Context.Client.CurrentUser.Username}` for more info.")
                     .WithInlineField("Owner", $"{application.Owner}")
                     .WithInlineField("Discord.NET version", DiscordConfig.Version)
                     .WithInlineField("Uptime", (DateTime.Now - process.StartTime).ToString(@"dd'd 'hh'h 'mm'm 'ss's'"))

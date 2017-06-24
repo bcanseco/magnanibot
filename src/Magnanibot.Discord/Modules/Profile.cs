@@ -17,7 +17,7 @@ namespace Magnanibot.Modules
 
         [Command, Summary("Gets Discord info about someone on the server.")]
         [Remarks("Example: !profile @fred#1337")]
-        private async Task GetAsync(IUser user)
+        private async Task GetAsync([Remainder] IUser user)
         {
             var roleNames = string.Join(", ", Context.Guild.Roles
                 .Where(r => ((IGuildUser) user).RoleIds.Contains(r.Id) && r.Name != "@everyone")
