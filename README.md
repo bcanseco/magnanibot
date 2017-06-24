@@ -12,7 +12,7 @@ This is just my personal chatbot, so there isn't much documentation for it. If y
 2. `cd magnanibot`
 2. Open the [tokens file](tokens.json) with your favorite editor and fill in your bot's [token](https://discordapp.com/developers/applications/me) for `Discord`.
    * Commands that pull from third-party APIs require keys; click [here](https://github.com/bcanseco/common-bot-library#services) for more info.
-   * The [Memory](src/Magnanibot.Discord/Modules/Memory.cs) and [Trophy](src/Magnanibot.Discord/Modules/Trophy.cs) commabds pull from the database denoted by the `MySql` property. Check the [Context folder](src/Magnanibot.Discord/Context) for schema details.
+   * The [Memory](src/Magnanibot.Discord/Modules/Memory.cs) and [Trophy](src/Magnanibot.Discord/Modules/Trophy.cs) commands pull from the database denoted by the `MySql` property. Check the [Context folder](src/Magnanibot.Discord/Context) for schema details.
    * You can optionally also fill in the `Alias` value to use a name other than "Magnanibot".
 3. `cd src/Magnanibot.Discord`
 4. `dotnet restore`
