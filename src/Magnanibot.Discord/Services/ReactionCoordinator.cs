@@ -36,18 +36,12 @@ namespace Magnanibot.Services
                     if (pair.Value.SentMessage.CreatedAt <= DateTime.Now.AddDays(-3))
                     {
                         WatchedMessages.Remove(pair.Key);
-                        await pair.Value.OnRemoveAsync(); // remove emoji buttons
+                        await pair.Value.OnRemoveAsync();
                     }
                 }
 
                 await Logger.InfoAsync<Task>($"Finished audit. {WatchedMessages.Count} messages remain.");
             }
-        }
-
-        public Task ForceStopWatchingAsync(InteractiveMessage message)
-        {
-            WatchedMessages.Remove(message.SentMessage.Id);
-            return Task.CompletedTask;
         }
 
         public async Task SendInteractiveMessageAsync(
@@ -57,7 +51,7 @@ namespace Magnanibot.Services
             var sentMessage = await context.Channel.SendMessageAsync(string.Empty, false, interactiveMsg);
             WatchedMessages.Add(sentMessage.Id, interactiveMsg);
 
-            await interactiveMsg.OnSendAsync(sentMessage); // add emoji buttons
+            await interactiveMsg.OnSendAsync(sentMessage);
         }
 
         private async Task OnReactionAsync(

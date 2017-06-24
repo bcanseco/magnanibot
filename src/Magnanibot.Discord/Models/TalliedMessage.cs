@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using Magnanibot.Extensions;
 
 namespace Magnanibot.Models
 {
@@ -81,7 +82,12 @@ namespace Magnanibot.Models
             return Task.CompletedTask;
         }
 
-        public override Task OnRemoveAsync() => Task.CompletedTask;
+        public override async Task OnRemoveAsync()
+            => await SentMessage.ModifyAsync(m => m.Embed = new EmbedBuilder()
+                .WithDescription("⌛ This vote has expired.")
+                .WithRandomColor()
+                .Build());
+
         public override Embed AsEmbed() => EmbedBuilder;
     }
 }

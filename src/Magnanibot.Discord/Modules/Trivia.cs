@@ -116,8 +116,6 @@ namespace Magnanibot.Modules
             });
 
             await Coordinator.SendInteractiveMessageAsync(Context, message);
-            await Task.Delay(TimeSpan.FromSeconds(60));
-            await Coordinator.ForceStopWatchingAsync(message);
         }
     }
 }
