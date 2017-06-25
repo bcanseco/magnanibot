@@ -23,7 +23,7 @@ namespace Magnanibot.Modules
             
             await EmbedAsync(new EmbedBuilder()
                 .WithColor(new Color(0x8bcbf6))
-                .WithInlineField("🌎 Location", $"{weather.Name}")
+                .WithInlineField("🌎 Location", $"{weather.Name}, {weather.CountryInitials}")
                 .WithInlineField("🌡 Temperature", $"{weather.Temperature}°F")
                 .WithInlineField("☁ Conditions", $"{weather.Conditions}")
                 .WithInlineField("😓 Humidity", $"{weather.Humidity}%")
