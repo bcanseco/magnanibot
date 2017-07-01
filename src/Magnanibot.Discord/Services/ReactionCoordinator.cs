@@ -49,6 +49,8 @@ namespace Magnanibot.Services
             InteractiveMessage interactiveMsg)
         {
             var sentMessage = await context.Channel.SendMessageAsync(string.Empty, false, interactiveMsg);
+            if ((interactiveMsg as PaginatedMessage)?.Total == 1) return;
+
             WatchedMessages.Add(sentMessage.Id, interactiveMsg);
 
             await interactiveMsg.OnSendAsync(sentMessage);

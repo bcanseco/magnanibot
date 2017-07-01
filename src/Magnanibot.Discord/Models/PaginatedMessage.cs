@@ -24,7 +24,7 @@ namespace Magnanibot.Models
         private ulong RequestorId { get; }
         private IList<EmbedBuilder> Pages { get; }
         private int CurrentPage { get; set; } = 1;
-        private int Total => Pages.Count;
+        public int Total => Pages.Count;
 
         private EmbedBuilder this[int i] => Pages.ElementAt(i - 1);
 
