@@ -52,6 +52,8 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<GoogleService>();
             collection.AddSingleton<YouTubeService>();
             collection.AddSingleton<OpenTriviaDbService>();
+            collection.AddSingleton<ImgurService>();
+            collection.AddSingleton<GithubService>();
             collection.AddSingleton(steamService);
             collection.AddSingleton(yahooFinanceService);
 
