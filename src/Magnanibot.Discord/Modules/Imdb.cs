@@ -52,7 +52,8 @@ namespace Magnanibot.Modules
                     .WithTitle($"{m.Title} ({m.Year})")
                     .WithDescription($"`!imdb {m.Year} {m.Type.ToString().ToLower()} {m.Title}`")
                     .WithUrl($"http://www.imdb.com/title/{m.ImdbId}")
-                    .WithImageUrl(m.Poster != "N/A", m.Poster))
+                    .WithImageUrl(m.Poster != "N/A", m.Poster)
+                    .WithColor(new Color(0x432052)))
                 .ToList();
 
             if (!media.Any())
