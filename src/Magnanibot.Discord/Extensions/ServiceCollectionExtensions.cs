@@ -49,11 +49,12 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<OmdbService>();
             collection.AddSingleton<TwitterService>();
             collection.AddSingleton<RedditService>();
-            collection.AddSingleton<GoogleService>();
+            collection.AddSingleton<GoogleSearchService>();
             collection.AddSingleton<YouTubeService>();
             collection.AddSingleton<OpenTriviaDbService>();
             collection.AddSingleton<ImgurService>();
             collection.AddSingleton<GithubService>();
+            collection.AddSingleton<YandexTranslateService>();
             collection.AddSingleton(steamService);
             collection.AddSingleton(yahooFinanceService);
 
@@ -64,6 +65,7 @@ namespace Magnanibot.Extensions
             service.AddTypeReader<SymbolBase>(new SymbolTypeReader(yahooFinanceService));
             service.AddTypeReader<SteamResult>(new SteamResultTypeReader(steamService));
             service.AddTypeReader<OpenTriviaDbCategory>(new CategoryTypeReader());
+            service.AddTypeReader<YandexLanguage>(new YandexLanguageTypeReader());
 
             return collection;
         }

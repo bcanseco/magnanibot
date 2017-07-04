@@ -19,10 +19,10 @@ namespace Magnanibot.Modules
     [RequireContext(ContextType.Guild)]
     public class Google : Module
     {
-        private Google(GoogleService service, ReactionCoordinator coordinator)
+        private Google(GoogleSearchService service, ReactionCoordinator coordinator)
             => (Service, Coordinator) = (service, coordinator);
 
-        private GoogleService Service { get; }
+        private GoogleSearchService Service { get; }
         private ReactionCoordinator Coordinator { get; }
         
         [Command]
