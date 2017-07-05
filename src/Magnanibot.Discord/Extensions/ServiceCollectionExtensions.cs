@@ -41,6 +41,8 @@ namespace Magnanibot.Extensions
             var yahooFinanceService = new YahooFinanceService();
 
             collection.AddSingleton(service);
+            collection.AddSingleton(steamService);
+            collection.AddSingleton(yahooFinanceService);
             collection.AddSingleton<NCalcService>();
             collection.AddSingleton<RandomService>();
             collection.AddSingleton<OpenWeatherMapService>();
@@ -55,8 +57,7 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<ImgurService>();
             collection.AddSingleton<GithubService>();
             collection.AddSingleton<YandexTranslateService>();
-            collection.AddSingleton(steamService);
-            collection.AddSingleton(yahooFinanceService);
+            collection.AddSingleton<GoogleVisionService>();
 
             service.AddTypeReader<ModuleInfo>(new ModuleInfoTypeReader(service));
             service.AddTypeReader<IGuild>(new GuildTypeReader());
