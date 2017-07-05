@@ -16,17 +16,23 @@ namespace Magnanibot.Modules
 
         private YandexTranslateService Service { get; }
 
-        [Command, Summary("Translates with an explicitly provided source text language.")]
+        [Command, Summary("Translates explicitly from one language to another.")]
         [Remarks("Example: !translate english spanish How are you?")]
-        [Priority(2)]
+        [Priority(3)]
         private async Task GetAsync(YandexLanguage source, YandexLanguage target, [Remainder] string text)
             => await GetAsync(text, source, target);
 
         [Command, Summary("Translates by auto-detecting the source text's language.")]
         [Remarks("Example: !translate spanish How are you?")]
-        [Priority(1)]
+        [Priority(2)]
         private async Task GetAsync(YandexLanguage target, [Remainder] string text)
             => await GetAsync(text, null, target);
+
+        [Command, Summary("Translates to English by auto-detecting the source text's language.")]
+        [Remarks("Example: !translate ¿Cómo estás?")]
+        [Priority(1)]
+        private async Task GetAsync([Remainder] string text)
+            => await GetAsync(text, null, new YandexLanguage("en"));
 
         private async Task GetAsync(string text, YandexLanguage source, YandexLanguage target)
         {
