@@ -58,6 +58,7 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<GithubService>();
             collection.AddSingleton<YandexTranslateService>();
             collection.AddSingleton<GoogleVisionService>();
+            collection.AddSingleton<WatsonPersonalityService>();
 
             service.AddTypeReader<ModuleInfo>(new ModuleInfoTypeReader(service));
             service.AddTypeReader<IGuild>(new GuildTypeReader());
