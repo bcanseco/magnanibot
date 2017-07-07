@@ -12,18 +12,18 @@ using Color = Discord.Color;
 
 namespace Magnanibot.Modules
 {
-    [Group(nameof(Analyze)), Alias("vision", "ana")]
+    [Group(nameof(Detect)), Alias("vision", "scan")]
     [Summary("Uses machine learning to analyze images.")]
     [RequireContext(ContextType.Guild)]
-    public class Analyze : Module
+    public class Detect : Module
     {
-        public Analyze(GoogleVisionService service)
+        public Detect(GoogleVisionService service)
             => Service = service;
 
         private GoogleVisionService Service { get; }
 
         [Command, Summary("Analyzes an attached image.")]
-        [Remarks("Example: !analyze")]
+        [Remarks("Example: !detect")]
         private async Task GetAsync()
         {
             var url = Context.Message.Attachments.FirstOrDefault()?.Url
@@ -33,7 +33,7 @@ namespace Magnanibot.Modules
         }
 
         [Command, Summary("Analyzes an image using an image URL.")]
-        [Remarks("Example: !analyze https://i.imgur.com/g3D5jNz.jpg")]
+        [Remarks("Example: !detect https://i.imgur.com/g3D5jNz.jpg")]
         private async Task GetAsync([Remainder] Uri url)
         {
             var result = await Service.AnalyzeAsync(await url.AsBase64Url());
