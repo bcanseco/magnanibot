@@ -16,13 +16,13 @@ namespace Magnanibot
 
         private static async Task MainAsync()
         {
+            await Tokens.LoadAsync<BotTokens>();
+
             var services = await ConfigureServicesAsync();
             var client = services.GetRequiredService<DiscordSocketClient>();
-
-            await Tokens.LoadAsync<BotTokens>();
+            
             await client.LoginAsync(TokenType.Bot, BotTokens.Discord);
             await client.StartAsync();
-
             await Task.Delay(-1); // block task so bot stays running
         }
 

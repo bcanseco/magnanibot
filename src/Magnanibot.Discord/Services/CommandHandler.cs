@@ -10,14 +10,19 @@ namespace Magnanibot.Services
 {
     public class CommandHandler
     {
-        public CommandHandler(IServiceProvider provider, DiscordSocketClient discord, CommandService commands)
+        public CommandHandler(
+            IServiceProvider provider, 
+            DiscordSocketClient discord, 
+            CommandService commands, 
+            Chatter chatter)
         {
-            (Discord, Commands, Provider) = (discord, commands, provider);
-            Discord.MessageReceived += OnMessage;
+            (Discord, Commands, Provider, Chatter) = (discord, commands, provider, chatter);
+            Discord.MessageReceived += OnMessageAsync;
         }
 
         private DiscordSocketClient Discord { get; }
         private CommandService Commands { get; }
+        private Chatter Chatter { get; }
         private IServiceProvider Provider { get; set; }
 
         public async Task<IServiceProvider> InitializeAsync(IServiceProvider provider)
@@ -26,15 +31,17 @@ namespace Magnanibot.Services
             return Provider = provider;
         }
 
-        private Task OnMessage(SocketMessage rawMessage)
+        private async Task OnMessageAsync(SocketMessage rawMessage)
         {
             var argPos = 0;
 
-            if (!(rawMessage is SocketUserMessage message)
-                || message.Source != MessageSource.User
-                || !message.IsBotQuery(Discord.CurrentUser, ref argPos))
+            var message = rawMessage as SocketUserMessage;
+            if (message?.Source != MessageSource.User) return;
+
+            if (!message.IsBotQuery(Discord.CurrentUser, ref argPos))
             {
-                return Task.CompletedTask;
+                await Chatter.TryRespondAsync(message);
+                return;
             }
 
             var context = new SocketCommandContext(Discord, message);
@@ -52,8 +59,6 @@ namespace Magnanibot.Services
                         .WithFooter($"❌ {result.Error}: {result.ErrorReason}")
                         .WithColor(new Color(0xFF0000)));
             });
-
-            return Task.CompletedTask;
         }
     }
 }

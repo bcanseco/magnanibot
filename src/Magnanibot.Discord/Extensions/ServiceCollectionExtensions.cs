@@ -59,6 +59,7 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<YandexTranslateService>();
             collection.AddSingleton<GoogleVisionService>();
             collection.AddSingleton<WatsonPersonalityService>();
+            collection.AddSingleton<PandorabotService>();
 
             service.AddTypeReader<ModuleInfo>(new ModuleInfoTypeReader(service));
             service.AddTypeReader<IGuild>(new GuildTypeReader());
@@ -80,6 +81,7 @@ namespace Magnanibot.Extensions
             this IServiceCollection collection)
         {
             collection.AddSingleton<Logger>();
+            collection.AddSingleton<Chatter>();
             collection.AddSingleton<CommandHandler>();
             collection.AddSingleton<ReactionCoordinator>();
 
