@@ -43,9 +43,11 @@ namespace Magnanibot.Modules
             await (await Context.Guild.GetChannelsAsync())
                 .OfType<IMessageChannel>()
                 .FirstOrDefault(ch => ch.Equals(channel))
-                .GetMessagesAsync(1000)
+                .GetMessagesAsync(5000)
                 .ForEachAsync(batch =>
                 {
+                    if (userMessages.Count() >= 3000) return;
+
                     userMessages = userMessages.Concat(batch
                         .Where(m => m.Author.Equals(user))
                         .Where(m => !string.IsNullOrWhiteSpace(m.Content))
