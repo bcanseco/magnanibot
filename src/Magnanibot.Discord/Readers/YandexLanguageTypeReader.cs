@@ -7,7 +7,7 @@ namespace Magnanibot.Readers
 {
     public class YandexLanguageTypeReader : TypeReader
     {
-        public override Task<TypeReaderResult> Read(ICommandContext context, string input)
+        public override Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
             try
             {

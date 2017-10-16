@@ -6,7 +6,7 @@ namespace Magnanibot.Readers
 {
     public class UriTypeReader : TypeReader
     {
-        public override Task<TypeReaderResult> Read(ICommandContext context, string url)
+        public override Task<TypeReaderResult> Read(ICommandContext context, string url, IServiceProvider services)
         {
             if (!url.Contains("://")) url = $"http://{url}";
 

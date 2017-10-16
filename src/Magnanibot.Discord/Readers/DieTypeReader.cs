@@ -7,7 +7,7 @@ namespace Magnanibot.Readers
 {
     public class DieTypeReader : TypeReader
     {
-        public override Task<TypeReaderResult> Read(ICommandContext context, string sides)
+        public override Task<TypeReaderResult> Read(ICommandContext context, string sides, IServiceProvider services)
         {
             try
             {

@@ -61,12 +61,12 @@ namespace Magnanibot.Extensions
             collection.AddSingleton<WatsonPersonalityService>();
             collection.AddSingleton<PandorabotService>();
 
-            service.AddTypeReader<ModuleInfo>(new ModuleInfoTypeReader(service));
+            service.AddTypeReader<ModuleInfo>(new ModuleInfoTypeReader());
             service.AddTypeReader<IGuild>(new GuildTypeReader());
             service.AddTypeReader<Uri>(new UriTypeReader());
             service.AddTypeReader<Die>(new DieTypeReader());
-            service.AddTypeReader<SymbolBase>(new SymbolTypeReader(yahooFinanceService));
-            service.AddTypeReader<SteamResult>(new SteamResultTypeReader(steamService));
+            service.AddTypeReader<SymbolBase>(new SymbolTypeReader());
+            service.AddTypeReader<SteamResult>(new SteamResultTypeReader());
             service.AddTypeReader<OpenTriviaDbCategory>(new CategoryTypeReader());
             service.AddTypeReader<YandexLanguage>(new YandexLanguageTypeReader());
 

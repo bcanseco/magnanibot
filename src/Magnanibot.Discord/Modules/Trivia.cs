@@ -40,7 +40,7 @@ namespace Magnanibot.Modules
         [Command, Summary("Uses a random question with a particular difficulty (easy/medium/hard).")]
         [Remarks("Example: !trivia hard")]
         private async Task GetAsync(Difficulty difficulty)
-            => await GetWithParamsAsync(default(Category), difficulty);
+            => await GetWithParamsAsync(default, difficulty);
 
         [Command, Summary("Uses a random question with a [particular category](https://pastebin.com/5xnQn0Qr).")]
         [Remarks("Example: !trivia film")]
@@ -52,7 +52,7 @@ namespace Magnanibot.Modules
         private async Task GetAsync(Difficulty difficulty, [Remainder] Category category)
             => await GetWithParamsAsync(category, difficulty);
 
-        private async Task GetWithParamsAsync(Category category = default(Category), Difficulty? difficulty = null)
+        private async Task GetWithParamsAsync(Category category = default, Difficulty? difficulty = null)
         {
             var trivia = (await Service.GetTriviaAsync(1, category, difficulty, Type.Multiple)).First();
             var correctPosition = RandomService.Generator.Next(4);

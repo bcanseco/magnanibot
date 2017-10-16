@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Discord.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Magnanibot.Readers
 {
     public class ModuleInfoTypeReader : TypeReader
     {
-        public ModuleInfoTypeReader(CommandService service)
-            => Service = service;
-
-        private CommandService Service { get; }
-
-        public override Task<TypeReaderResult> Read(ICommandContext context, string moduleName)
+        public override Task<TypeReaderResult> Read(ICommandContext context, string moduleName, IServiceProvider services)
         {
-            var modules = Service.Modules as IList<ModuleInfo> ?? Service.Modules.ToList();
+            var commandService = services.GetService<CommandService>();
+            var modules = commandService.Modules as IList<ModuleInfo> ?? commandService.Modules.ToList();
             moduleName = moduleName.Replace("!", string.Empty);
 
             var matchedModule =

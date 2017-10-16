@@ -9,7 +9,7 @@ namespace Magnanibot.Readers
 {
     public class CategoryTypeReader : TypeReader
     {
-        public override Task<TypeReaderResult> Read(ICommandContext context, string input)
+        public override Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
             // Strip symbols and spaces
             input = new Regex("[^a-zA-Z0-9]").Replace(input, string.Empty);

@@ -3,19 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommonBotLibrary.Services;
 using Discord.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Magnanibot.Readers
 {
     public class SteamResultTypeReader : TypeReader
     {
-        public SteamResultTypeReader(SteamService service)
-            => Service = service;
-
-        private SteamService Service { get; }
-
-        public override async Task<TypeReaderResult> Read(ICommandContext context, string gameName)
+        public override async Task<TypeReaderResult> Read(ICommandContext context, string gameName, IServiceProvider services)
         {
-            var games = (await Service.SearchAsync(gameName)).ToList();
+            var steamService = services.GetService<SteamService>();
+            var games = (await steamService.SearchAsync(gameName)).ToList();
 
             var game = games.FirstOrDefault(g => g.Title.Equals(gameName, StringComparison.OrdinalIgnoreCase))
                        ?? games.FirstOrDefault();

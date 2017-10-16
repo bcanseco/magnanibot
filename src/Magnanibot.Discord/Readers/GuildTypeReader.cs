@@ -7,7 +7,7 @@ namespace Magnanibot.Readers
 {
     public class GuildTypeReader : TypeReader
     {
-        public override async Task<TypeReaderResult> Read(ICommandContext context, string guildName)
+        public override async Task<TypeReaderResult> Read(ICommandContext context, string guildName, IServiceProvider services)
         {
             var guilds = (await context.Client.GetGuildsAsync()).ToList();
             var matchedGuild = guilds.FirstOrDefault(

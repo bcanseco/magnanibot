@@ -32,7 +32,7 @@ namespace Magnanibot.Modules
         [Command, Summary("Gets posts from a subreddit listing (Hot by default).")]
         [Remarks("Example: !reddit askreddit controversial")]
         [Priority(1)]
-        private async Task GetAsync(string sub = null, Category category = default(Category))
+        private async Task GetAsync(string sub = null, Category category = default)
         {
             var posts = (await Service.GetPostsAsync(sub, category, 30)).ToList();
             if (!posts.Any()) throw new BotException("No posts were found in that subreddit.");

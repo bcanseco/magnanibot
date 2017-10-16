@@ -63,7 +63,7 @@ namespace Magnanibot.Modules
                 .Select(prop =>
                 {
                     var list = (List<WatsonPersonalityResult.TraitTree>) prop.GetValue(result);
-                    return (Name: prop.Name, Nodes: list.First().Children != null
+                    return (prop.Name, Nodes: list.First().Children != null
                         ? list.SelectMany(trait => trait.Children)
                         : list);
                 })

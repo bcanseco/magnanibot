@@ -23,7 +23,7 @@ namespace Magnanibot.Modules
         private OmdbService Service { get; }
         private ReactionCoordinator Coordinator { get; }
 
-        private async Task GetAsync(string title, OmdbType type = default(OmdbType), int? year = null)
+        private async Task GetAsync(string title, OmdbType type = default, int? year = null)
         {
             var media = await Service.DirectAsync(title, type, year);
             
@@ -45,7 +45,7 @@ namespace Magnanibot.Modules
             await EmbedAsync(embed);
         }
 
-        private async Task GetMultipleAsync(string title, OmdbType type = default(OmdbType), int? year = null)
+        private async Task GetMultipleAsync(string title, OmdbType type = default, int? year = null)
         {
             var media = (await Service.SearchAsync(title, type, year))
                 .Select(m => new EmbedBuilder()
@@ -68,7 +68,7 @@ namespace Magnanibot.Modules
         [Remarks("Example: !imdb batman")]
         [Priority(1)]
         private async Task GetAsync([Remainder] string title)
-            => await GetAsync(title, default(OmdbType));
+            => await GetAsync(title, default);
 
         [Command, Summary("Gets the most relevant [movie/series] by title.")]
         [Remarks("Example: !imdb series batman")]
@@ -87,7 +87,7 @@ namespace Magnanibot.Modules
         [Remarks("Example: !imdb search batman")]
         [Priority(4)]
         private async Task GetMultipleAsync([Remainder] string title)
-            => await GetMultipleAsync(title, default(OmdbType));
+            => await GetMultipleAsync(title, default);
 
         [Command("search")]
         [Summary("Searches for relevant [movie/series] by title.")]

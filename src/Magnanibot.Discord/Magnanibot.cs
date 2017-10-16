@@ -11,10 +11,7 @@ namespace Magnanibot
 {
     public class Magnanibot
     {
-        private static void Main()
-            => MainAsync().GetAwaiter().GetResult();
-
-        private static async Task MainAsync()
+        private static async Task Main()
         {
             await Tokens.LoadAsync<BotTokens>();
 
